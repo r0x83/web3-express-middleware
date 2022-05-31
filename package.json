@@ -1,0 +1,23 @@
+{
+  "name": "web3-express-middleware",
+  "version": "1.0.0",
+  "description": "Response header with signature",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imroshin/web3-express-middleware.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imroshin/web3-express-middleware/issues"
+  },
+  "homepage": "https://github.com/imroshin/web3-express-middleware#readme",
+  "devDependencies": {
+    "hardhat": "^2.9.7"
+  }
+}

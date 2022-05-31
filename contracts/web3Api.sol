@@ -24,21 +24,25 @@ contract web3Api is ChainlinkClient {
         fee = 100000000000000000; //0.1 LINK Token
     }
 
+    //BASIC REQUEST MODEL
+
+    //function that requests to the chainlink oracle
     function resolve(bytes calldata ipfs_hash) public returns (bytes32) {
         bytes memory url = "localhost:5001/api/v0/cat?arg="; 
         Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
-        request.add("get", url + ipfs_hash);
+        request.add("get", string(abi.encodePacked(url, ipfs_hash)));
         bytes32 request_id = sendChainlinkRequestTo(oracle, request, fee);
-        idHash[request_id] = ipfs_hash;
+        idHash[request_id] = string(ipfs_hash);
         return request_id;
     }
 
+    //function that gets called by oracle to send data back
     function fulfill(bytes32 _requestId, string calldata _md5hash) public recordChainlinkFulfillment(_requestId) {
         idHash[_requestId] = _md5hash;
     }
 
-    function resolveCallback(bytes32 _requestId, string calldata _md5) public returns (bool verified){
-        // should add check to see if the request is completed/pending/errored out
-        return idHash[_requestId] == _md5;
+    //callback function for verifying
+    function resolveCallback(bytes32 _requestId, string calldata _md5) public view returns (bool verified){
+        return keccak256(bytes(idHash[_requestId])) == keccak256(bytes(_md5));
     }
 }

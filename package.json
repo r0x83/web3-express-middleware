@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/imroshin/web3-express-middleware#readme",
   "devDependencies": {
+    "@openzeppelin/contracts": "^4.6.0",
     "hardhat": "^2.9.7"
+  },
+  "dependencies": {
+    "@chainlink/contracts": "^0.4.1"
   }
 }
